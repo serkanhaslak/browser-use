@@ -22,7 +22,7 @@ fi
 case $DEPLOYMENT_MODE in
     "api")
         echo "🌐 Starting FastAPI web service..."
-        python src/api_server.py --port $PORT
+        python ./src/api_server.py --port $PORT
         ;;
     "mcp")
         echo "🔌 Starting MCP server..."
@@ -30,14 +30,14 @@ case $DEPLOYMENT_MODE in
         ;;
     "ui")
         echo "🎨 Starting Streamlit web UI..."
-        streamlit run src/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+        streamlit run ./src/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
         ;;
     "hybrid")
         echo "🚀 Starting hybrid mode (API + UI)..."
         # Run API server in background
-        python src/api_server.py --port $PORT &
+        python ./src/api_server.py --port $PORT &
         # Run Streamlit on different port
-        streamlit run src/streamlit_app.py --server.port $((PORT + 1)) --server.address 0.0.0.0 &
+        streamlit run ./src/streamlit_app.py --server.port $((PORT + 1)) --server.address 0.0.0.0 &
         # Wait for both processes
         wait
         ;;
