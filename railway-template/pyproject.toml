@@ -80,8 +80,15 @@ eval = [
     "hyperbrowser==0.47.0",
     "browserbase==1.4.0",
 ]
+railway = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0", 
+    "streamlit>=1.28.0",
+    "python-multipart>=0.0.6",
+    "httpx>=0.25.0",
+]
 all = [
-    "browser-use[cli,examples,aws]",
+    "browser-use[cli,examples,aws,railway]",
 ]
 
 # will prefer to use local source code checked out in ../../browser-use (if present) instead of pypi browser-use package

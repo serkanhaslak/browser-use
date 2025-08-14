@@ -5,8 +5,19 @@
 
 set -e
 
-# Virtual environment is already activated via railpack PATH configuration
-# No need to explicitly activate
+# Ensure virtual environment is activated (defensive)
+if [ -f "/app/.venv/bin/activate" ]; then
+    source /app/.venv/bin/activate
+    echo "✅ Activated virtual environment"
+else
+    echo "⚠️  No virtual environment found, using system Python"
+fi
+
+# Verify critical dependencies
+python -c "import uvicorn, fastapi, streamlit" 2>/dev/null || {
+    echo "❌ Missing dependencies detected, trying to install..."
+    pip install fastapi uvicorn streamlit
+}
 
 # Default values
 DEPLOYMENT_MODE=${DEPLOYMENT_MODE:-"api"}
