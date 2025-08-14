@@ -26,6 +26,6 @@ RUN --mount=type=cache,target=/root/.cache/uv,sharing=locked \
     uv sync --all-extras --locked --no-dev --compile-bytecode
 
 USER "$BROWSERUSE_USER"
-VOLUME "$DATA_DIR"
+# VOLUME "$DATA_DIR" - Commented out for Railway (use Railway volumes instead)  
 EXPOSE 9242 9222
 ENTRYPOINT ["browser-use"]

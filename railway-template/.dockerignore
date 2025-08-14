@@ -1,0 +1,28 @@
+# Prevent Railway from using root Dockerfiles
+# This ensures railpack.json is used instead
+
+../Dockerfile
+../Dockerfile.fast
+
+# Ignore development files
+.git
+.gitignore
+*.md
+.env*
+.vscode
+.idea
+__pycache__
+*.pyc
+.pytest_cache
+tests/
+docs/
+examples/
+.github/
+
+# Ignore build artifacts
+dist/
+build/
+*.egg-info/
+.coverage
+.tox/
+.mypy_cache/
