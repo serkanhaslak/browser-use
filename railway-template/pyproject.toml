@@ -89,6 +89,9 @@ railway = [
     "redis>=5.0.0",
     "aioredis>=2.0.0",
     "pillow>=11.0.0",
+    "bubus>=1.5.1",
+    "markdownify==1.1.0",
+    "patchright>=1.52.5",
 ]
 all = [
     "browser-use[cli,examples,aws,railway]",

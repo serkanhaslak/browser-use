@@ -14,9 +14,13 @@ else
 fi
 
 # Verify critical dependencies
-python -c "import uvicorn, fastapi, streamlit, dotenv, psutil, redis, aioredis; from pydantic_settings import BaseSettings; import PIL" 2>/dev/null || {
+python -c "
+import uvicorn, fastapi, streamlit, dotenv, psutil, redis, aioredis, bubus, markdownify, patchright
+from pydantic_settings import BaseSettings
+import PIL
+" 2>/dev/null || {
     echo "❌ Missing dependencies detected, trying to install..."
-    pip install fastapi uvicorn streamlit python-dotenv psutil redis aioredis pydantic-settings pillow
+    pip install fastapi uvicorn streamlit python-dotenv psutil redis aioredis pydantic-settings pillow bubus markdownify patchright playwright
 }
 
 # Default values
