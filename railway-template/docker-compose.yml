@@ -1,0 +1,73 @@
+# Docker Compose for local browser-use development
+# NOTE: For Railway deployment, use railpack.json instead
+version: '3.8'
+
+services:
+  browser-use-api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DEPLOYMENT_MODE=api
+      - DEFAULT_LLM_PROVIDER=openai
+      - DEFAULT_MODEL=gpt-4o-mini
+      - MAX_CONCURRENT_SESSIONS=2
+      - BROWSER_TIMEOUT=300
+      - LOG_LEVEL=INFO
+      - ENABLE_TELEMETRY=false
+      # Add your API keys here or use .env file
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - browser_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  browser-use-ui:
+    build:
+      context: ..
+      dockerfile: railway-template/Dockerfile
+    ports:
+      - "8501:8000"
+    environment:
+      - DEPLOYMENT_MODE=ui
+      - DEFAULT_LLM_PROVIDER=openai
+      - DEFAULT_MODEL=gpt-4o-mini
+      - MAX_CONCURRENT_SESSIONS=2
+      - BROWSER_TIMEOUT=300
+      - LOG_LEVEL=INFO
+      - ENABLE_TELEMETRY=false
+    volumes:
+      - browser_data:/data
+    restart: unless-stopped
+    profiles:
+      - ui
+
+  browser-use-mcp:
+    build:
+      context: ..
+      dockerfile: railway-template/Dockerfile
+    ports:
+      - "9242:8000"
+    environment:
+      - DEPLOYMENT_MODE=mcp
+      - DEFAULT_LLM_PROVIDER=openai
+      - DEFAULT_MODEL=gpt-4o-mini
+      - LOG_LEVEL=INFO
+      - ENABLE_TELEMETRY=false
+    volumes:
+      - browser_data:/data
+    restart: unless-stopped
+    profiles:
+      - mcp
+
+volumes:
+  browser_data:
+    driver: local
