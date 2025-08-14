@@ -91,21 +91,21 @@ def main():
         st.subheader("🧠 LLM Settings")
         provider = st.selectbox(
             "Provider",
-            options=['openai', 'anthropic', 'google'],
+            options=['google', 'openai', 'anthropic'],
             index=0,
             help="Select your LLM provider"
         )
         
         # Model selection based on provider
-        if provider == 'openai':
+        if provider == 'google':
+            model_options = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-1.5-flash-8b']
+            default_model = 'gemini-1.5-flash'
+        elif provider == 'openai':
             model_options = ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'gpt-3.5-turbo']
             default_model = 'gpt-4o-mini'
-        elif provider == 'anthropic':
+        else:  # anthropic
             model_options = ['claude-3-5-sonnet-20241022', 'claude-3-5-haiku-20241022', 'claude-3-opus-20240229']
             default_model = 'claude-3-5-sonnet-20241022'
-        else:  # google
-            model_options = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro']
-            default_model = 'gemini-1.5-flash'
         
         model = st.selectbox("Model", options=model_options, index=0)
         temperature = st.slider("Temperature", 0.0, 1.0, 0.0, 0.1)

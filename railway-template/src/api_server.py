@@ -26,9 +26,9 @@ from browser_use.browser import BrowserSession, BrowserProfile
 from browser_use.agent.views import AgentSettings
 
 
-# Configuration from environment
-DEFAULT_LLM_PROVIDER = os.getenv('DEFAULT_LLM_PROVIDER', 'openai')
-DEFAULT_MODEL = os.getenv('DEFAULT_MODEL', 'gpt-4o-mini')
+# Configuration from environment  
+DEFAULT_LLM_PROVIDER = os.getenv('DEFAULT_LLM_PROVIDER', 'google')
+DEFAULT_MODEL = os.getenv('DEFAULT_MODEL', 'gemini-1.5-flash')
 MAX_CONCURRENT_SESSIONS = int(os.getenv('MAX_CONCURRENT_SESSIONS', '3'))
 BROWSER_TIMEOUT = int(os.getenv('BROWSER_TIMEOUT', '300'))
 
