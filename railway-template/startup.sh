@@ -14,9 +14,9 @@ else
 fi
 
 # Verify critical dependencies
-python -c "import uvicorn, fastapi, streamlit, dotenv" 2>/dev/null || {
+python -c "import uvicorn, fastapi, streamlit, dotenv, psutil, redis, aioredis" 2>/dev/null || {
     echo "❌ Missing dependencies detected, trying to install..."
-    pip install fastapi uvicorn streamlit python-dotenv
+    pip install fastapi uvicorn streamlit python-dotenv psutil redis aioredis
 }
 
 # Default values
